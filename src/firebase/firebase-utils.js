@@ -1,6 +1,17 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+	getAuth,
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from "firebase/auth";
+import {
+	getFirestore,
+	collection,
+	addDoc,
+	query,
+	where,
+	getDocs,
+} from "firebase/firestore";
 
 // Initialize Firebase
 initializeApp({
@@ -29,6 +40,25 @@ export function signUpUser(userEmail, userPassword, objToAdd) {
 			console.log(user);
 		})
 		.catch(error => {
-			console.log(error.code, error.message);
+			console.error(error.code, error.message);
+		});
+}
+
+// authenticate user function
+export function authenticateUser(userEmail, userPassword) {
+	signInWithEmailAndPassword(auth, userEmail, userPassword)
+		.then(async userCredential => {
+			// Signed in
+			const userEmail = await userCredential.user.email;
+			// querying the database to find the user
+			const q = query(userCollectionRef, where("email", "==", userEmail));
+			console.log(q);
+			const userSnapshot = await getDocs(q);
+			userSnapshot.forEach(doc =>
+				console.log("UserId:", doc.id, "- User Data:", doc.data())
+			);
+		})
+		.catch(error => {
+			console.error(error.code, error.message);
 		});
 }

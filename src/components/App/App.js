@@ -1,5 +1,5 @@
 import React from "react";
-import { signUpUser } from "../../firebase/firebase-utils";
+import { authenticateUser, signUpUser } from "../../firebase/firebase-utils";
 import "./App.css";
 
 function App() {
@@ -25,6 +25,11 @@ function App() {
 				onClick={() => signUpUser(sampleData.email, samplePassword, sampleData)}
 			>
 				Sign Up with Fake Data
+			</button>
+			<button
+				onClick={() => authenticateUser(sampleData.email, samplePassword)}
+			>
+				Authenticate with Fake Data
 			</button>
 		</div>
 	);
