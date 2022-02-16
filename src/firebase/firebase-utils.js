@@ -3,6 +3,7 @@ import {
 	getAuth,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
+	signOut,
 } from "firebase/auth";
 import {
 	getFirestore,
@@ -61,4 +62,13 @@ export function authenticateUser(userEmail, userPassword) {
 		.catch(error => {
 			console.error(error.code, error.message);
 		});
+}
+
+export function signOutUser() {
+	signOut(auth)
+		.then(async result => {
+			console.log(result);
+			console.log("sign out successful");
+		})
+		.catch(error => console.error(error.message));
 }

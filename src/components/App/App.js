@@ -1,5 +1,10 @@
+import { signOut } from "@firebase/auth";
 import React from "react";
-import { authenticateUser, signUpUser } from "../../firebase/firebase-utils";
+import {
+	authenticateUser,
+	signUpUser,
+	signOutUser,
+} from "../../firebase/firebase-utils";
 import "./App.css";
 
 function App() {
@@ -31,6 +36,8 @@ function App() {
 			>
 				Authenticate with Fake Data
 			</button>
+
+			<button onClick={() => signOutUser()}>Sign Out User</button>
 		</div>
 	);
 }
