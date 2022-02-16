@@ -23,7 +23,7 @@ export default function SignUp() {
                         <input type="checkbox" id="accept" name="accept"/> I consent that I have read and agreed to the Terms &amp; Conditions
                         <input type="checkbox" id="accept" name="accept"/> I wish to receive promos, updates, and news letters from BELA and SpeakHabla
                     </div>
-                    <div>Create Account</div>
+                    <button>Create Account</button>
                     
                 
             </div>

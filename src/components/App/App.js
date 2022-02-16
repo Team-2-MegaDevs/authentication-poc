@@ -1,5 +1,10 @@
+import { signOut } from "@firebase/auth";
 import React from "react";
-import { authenticateUser, signUpUser } from "../../firebase/firebase-utils";
+import {
+	authenticateUser,
+	signUpUser,
+	signOutUser,
+} from "../../firebase/firebase-utils";
 import "./App.css";
 import SignIn from "../SignIn/SignIn"
 import SignUp from "../SignUp/SignUp"
@@ -29,7 +34,9 @@ function App() {
 				onClick={() => authenticateUser(sampleData.email, samplePassword)}
 			>
 				Authenticate with Fake Data
+				<button onClick={() => signOutUser()}>Sign Out User</button>
 			</button>
+
 	 */
 
 	return (
@@ -42,6 +49,7 @@ function App() {
             </div>
 			<SignIn/>
 			<SignUp/>
+
 		</div>
 	);
 }
