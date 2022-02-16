@@ -1,7 +1,8 @@
 import React from "react";
 import { authenticateUser, signUpUser } from "../../firebase/firebase-utils";
 import "./App.css";
-
+import SignIn from "../SignIn/SignIn"
+import SignUp from "../SignUp/SignUp"
 function App() {
 	//sample user object
 	const samplePassword = "456465165";
@@ -17,10 +18,8 @@ function App() {
 		type: "individual",
 		isEmployee: true,
 	};
-
-	return (
-		<div className='App'>
-			<h2>Firebase Authentication Proof of Concept</h2>
+	/**
+	 * <h2>Firebase Authentication Proof of Concept</h2>
 			<button
 				onClick={() => signUpUser(sampleData.email, samplePassword, sampleData)}
 			>
@@ -31,6 +30,18 @@ function App() {
 			>
 				Authenticate with Fake Data
 			</button>
+	 */
+
+	return (
+		<div className='App'>
+			<h2>Firebase Authentication Proof of Concept</h2>
+			<div className="signInHeader">
+                <div className="headerLeftSide">BELA</div>
+                <button className="headerRightSide">SignUp</button>
+				<button className="headerRightSide">SignIn</button>
+            </div>
+			<SignIn/>
+			<SignUp/>
 		</div>
 	);
 }
