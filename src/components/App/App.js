@@ -1,29 +1,29 @@
 import { signOut } from "@firebase/auth";
-import React from "react";
+import React, { useState } from "react";
 import {
-	authenticateUser,
-	signUpUser,
-	signOutUser,
+  authenticateUser,
+  signUpUser,
+  signOutUser,
 } from "../../firebase/firebase-utils";
 import "./App.css";
-import SignIn from "../SignIn/SignIn"
-import SignUp from "../SignUp/SignUp"
+import SignIn from "../SignIn/SignIn";
+import SignUp from "../SignUp/SignUp";
 function App() {
-	//sample user object
-	const samplePassword = "456465165";
-	const sampleData = {
-		email: "test@test.ca",
-		name: {
-			first: "Wilson",
-			last: "McDonalds",
-		},
-		username: "wilsmc515",
-		has_purchased_certificate: false,
-		jobTitle: "Accountant",
-		type: "individual",
-		isEmployee: true,
-	};
-	/**
+  //sample user object
+  const samplePassword = "456465165";
+  const sampleData = {
+    email: "test@test.ca",
+    name: {
+      first: "Wilson",
+      last: "McDonalds",
+    },
+    username: "wilsmc515",
+    has_purchased_certificate: false,
+    jobTitle: "Accountant",
+    type: "individual",
+    isEmployee: true,
+  };
+  /**
 	 * <h2>Firebase Authentication Proof of Concept</h2>
 			<button
 				onClick={() => signUpUser(sampleData.email, samplePassword, sampleData)}
@@ -38,20 +38,25 @@ function App() {
 			</button>
 
 	 */
+  const [userSignIn, setUserSignIn] = useState(true);
+  
+  return (
+    <div className="App">
+      <h2>Firebase Authentication Proof of Concept</h2>
+      <div className="signInHeader">
+        <div className="headerLeftSide">BELA</div>
 
-	return (
-		<div className='App'>
-			<h2>Firebase Authentication Proof of Concept</h2>
-			<div className="signInHeader">
-                <div className="headerLeftSide">BELA</div>
-                <button className="headerRightSide">SignUp</button>
-				<button className="headerRightSide">SignIn</button>
-            </div>
-			<SignIn/>
-			<SignUp/>
+        <button className="headerRightSide" onClick={()=>{setUserSignIn(false)}}>
+          SignUp
+        </button>
+        <button className="headerRightSide" onClick={()=>{setUserSignIn(true)}}>
+          SignIn
+        </button>
+      </div>
 
-		</div>
-	);
+      <div>{userSignIn ? <SignIn /> : <SignUp />}</div>
+    </div>
+  );
 }
 
 export default App;
