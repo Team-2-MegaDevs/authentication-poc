@@ -1,6 +1,23 @@
 import React from 'react'
 import './SignUp.css'
+import {
+    signUpUser
+  } from "../../firebase/firebase-utils";
 export default function SignUp() {
+    //sample user object
+  const samplePassword = "456465165";
+  const sampleData = {
+    email: "test@test.ca",
+    name: {
+      first: "Wilson",
+      last: "McDonalds",
+    },
+    username: "wilsmc515",
+    has_purchased_certificate: false,
+    jobTitle: "Accountant",
+    type: "individual",
+    isEmployee: true,
+  };
     return (
         <div className="signUpPage">
            
@@ -23,7 +40,7 @@ export default function SignUp() {
                         <input type="checkbox" id="accept" name="accept"/> I consent that I have read and agreed to the Terms &amp; Conditions
                         <input type="checkbox" id="accept" name="accept"/> I wish to receive promos, updates, and news letters from BELA and SpeakHabla
                     </div>
-                    <button>Create Account</button>
+                    <button onClick={() => signUpUser(sampleData.email, samplePassword, sampleData)}>Create Account</button>
                     
                 
             </div>

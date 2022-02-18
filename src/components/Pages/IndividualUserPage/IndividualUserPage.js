@@ -2,7 +2,7 @@ import React from 'react'
 import './IndividualUserPage.css'
 import {
     signOutUser
-  } from "../../firebase/firebase-utils";
+  } from "../../../firebase/firebase-utils";
 export default function IndividualUserPage() {
     return (
         <div>
