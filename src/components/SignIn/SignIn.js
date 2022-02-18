@@ -28,7 +28,7 @@ export default function SignIn() {
                     <input type="text"/>
                     <div>Password</div>
                     <input type="text"/>
-                    <button Click={() => signUpUser(sampleData.email, samplePassword, sampleData)}>Sign In</button>
+                    <button onClick={() => signUpUser(sampleData.email, samplePassword, sampleData)}>Sign In</button>
                 </div>
             </div>
         </div>
