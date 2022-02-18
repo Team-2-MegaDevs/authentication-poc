@@ -39,6 +39,7 @@ export function signUpUser(userEmail, userPassword, objToAdd) {
 			//add the newly created user to the database
 			const user = await addDoc(userCollectionRef, objToAdd);
 			console.log(user);
+			return user;
 		})
 		.catch(error => {
 			console.error(error.code, error.message);
@@ -53,11 +54,15 @@ export function authenticateUser(userEmail, userPassword) {
 			const userEmail = await userCredential.user.email;
 			// querying the database to find the user
 			const q = query(userCollectionRef, where("email", "==", userEmail));
-			console.log(q);
+			// console.log(q);
 			const userSnapshot = await getDocs(q);
-			userSnapshot.forEach(doc =>
-				console.log("UserId:", doc.id, "- User Data:", doc.data())
-			);
+			let userData;
+			userSnapshot.forEach(doc => {
+				userData = doc.data();
+			});
+
+			console.log(userData);
+			return userData;
 		})
 		.catch(error => {
 			console.error(error.code, error.message);
