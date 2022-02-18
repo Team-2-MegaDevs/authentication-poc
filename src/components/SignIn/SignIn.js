@@ -1,7 +1,7 @@
 import React from 'react'
 import './SignIn.css'
 import {
-    signUpUser
+    authenticateUser
   } from "../../firebase/firebase-utils";
 export default function SignIn() {
     //sample user object
@@ -28,7 +28,7 @@ export default function SignIn() {
                     <input type="text"/>
                     <div>Password</div>
                     <input type="text"/>
-                    <button onClick={() => signUpUser(sampleData.email, samplePassword, sampleData)}>Sign In</button>
+                    <button onClick={() => authenticateUser(sampleData.email, samplePassword, sampleData)}>Sign In</button>
                 </div>
             </div>
         </div>
