@@ -13,6 +13,12 @@ function App() {
   // Flag to display Individual, Organizational, Admin instead of SignIn or SignUp
   const [signedIn, setSignedIn] = useState(false);
 
+  const USER_TYPES = {
+    INDIVIDUAL: "individual",
+    ORGANIZATION: "organization",
+    ADMIN: "admin",
+  };
+
   return (
     <div className="App">
       <h2>Firebase Authentication Proof of Concept</h2>
@@ -29,7 +35,9 @@ function App() {
                       justifyContent: "center",
                     }}
                   >
-                    <div style={{ paddingRight: '10px'}}>Create an account?</div>
+                    <div style={{ paddingRight: "10px" }}>
+                      Create an account?
+                    </div>
                     <button
                       onClick={() => {
                         setUserSignIn(false);
@@ -46,12 +54,16 @@ function App() {
                 </div>
               ) : (
                 <div>
-                  <div style={{
+                  <div
+                    style={{
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "center",
-                    }}>
-                    <div style={{ paddingRight: '10px'}}>Already have an account?</div>
+                    }}
+                  >
+                    <div style={{ paddingRight: "10px" }}>
+                      Already have an account?
+                    </div>
                     <button
                       onClick={() => {
                         setUserSignIn(true);
@@ -71,20 +83,14 @@ function App() {
           </div>
         ) : (
           <div>
-            {typeOfCurrentUser === "individual" ? (
+            {typeOfCurrentUser === USER_TYPES.INDIVIDUAL && (
               <Individual setSignedIn={setSignedIn} />
-            ) : (
-              <div />
             )}
-            {typeOfCurrentUser === "organiation" ? (
+            {typeOfCurrentUser === USER_TYPES.ORGANIZATION && (
               <Organizational setSignedIn={setSignedIn} />
-            ) : (
-              <div />
             )}
-            {typeOfCurrentUser === "admin" ? (
+            {typeOfCurrentUser === USER_TYPES.ADMIN && (
               <Admin setSignedIn={setSignedIn} />
-            ) : (
-              <div />
             )}
           </div>
         )}
