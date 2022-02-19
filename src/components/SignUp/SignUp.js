@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignUp.css";
+import { USER_TYPES } from "../../service/USER_TYPES";
 import { signUpUser } from "../../firebase/firebase-utils";
-export default function SignUp(props) {
+export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [companyCode, setCompanyCode] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isEmployee, setIsEmployee] = useState(false);
+  const [type, setType] = useState("");
   //sample user object
-  const samplePassword = "456465165";
-  const sampleData = {
-    email: "test@test.ca",
+  const userData = {
+    email,
     name: {
-      first: "Wilson",
-      last: "McDonalds",
+      first,
+      last,
     },
-    username: "wilsmc515",
+    username: email,
+    password,
     has_purchased_certificate: false,
-    jobTitle: "Accountant",
-    type: "individual",
-    isEmployee: true,
+    companyCode,
+    jobTitle,
+    type,
+    isEmployee,
   };
   function signUpFunc() {
-    signUpUser(sampleData.email, samplePassword, sampleData);
-    props.setTypeOfCurrentUser(sampleData.type);
-    props.setSignedIn(false);
+    signUpUser(userData.email, userData.password, userData);
+    setTypeOfCurrentUser(type);
+    setSignedIn(false);
   }
   return (
     <div className="signUpPage">
@@ -27,16 +38,82 @@ export default function SignUp(props) {
         <div> SignUp to BELA </div>
         <div className="signUpForm">
           <div className="typeOfUserRow">
-            <button>Individual User</button>
-            <button>Organizational User</button>
+            <button
+              onClick={() => {
+                setIsEmployee(true);
+                setType(`${USER_TYPES.INDIVIDUAL}`);
+              }}
+            >
+              Individual User
+            </button>
+            <button
+              onClick={() => {
+                setIsEmployee(false);
+                setType(`${USER_TYPES.ORGANIZATION}`);
+              }}
+            >
+              Organizational User
+            </button>
+            <button
+              onClick={() => {
+                setIsEmployee(false);
+                setType(`${USER_TYPES.ADMIN}`);
+              }}
+            >
+              Admin User
+            </button>
           </div>
-          <input type="text" placeholder="First Name" />
-          <input type="text" placeholder="Last Name" />
-          <input type="text" placeholder="Job Title" />
-          <input type="text" placeholder="Company Code (optional)" />
-          <input type="text" placeholder="Email" />
-          <input type="text" placeholder="Password" />
-          <input type="text" placeholder="Confirm Password" />
+          <p>You're creating user type: {type}</p>
+          <p>This user is an employee: {isEmployee ? "true" : "false"}</p>
+          <input
+            type="text"
+            placeholder="First Name"
+            onChange={(ev) => {
+              setFirst(ev.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            onChange={(ev) => {
+              setLast(ev.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Job Title"
+            onChange={(ev) => {
+              setJobTitle(ev.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Company Code (optional)"
+            onChange={(ev) => {
+              setCompanyCode(ev.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            onChange={(ev) => {
+              setEmail(ev.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Password"
+            onChange={(ev) => {
+              setPassword(ev.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Confirm Password"
+            onChange={(ev) => {
+              setConfirmPassword(ev.target.value);
+            }}
+          />
           <div className="consentRow">
             <input type="checkbox" id="accept" name="accept" />
             <div>
