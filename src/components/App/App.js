@@ -12,42 +12,60 @@ function App() {
   const [typeOfCurrentUser, setTypeOfCurrentUser] = useState("");
   // Flag to display Individual, Organizational, Admin instead of SignIn or SignUp
   const [signedIn, setSignedIn] = useState(false);
-  
+
   return (
     <div className="App">
       <h2>Firebase Authentication Proof of Concept</h2>
       <div className="signInHeader">
         {!signedIn ? (
           <div>
-            <div className="headerLeftSide">BELA</div>
-
-            <button
-              onClick={() => {
-                setUserSignIn(false);
-              }}
-            >
-              SignUp
-            </button>
-
-            <button
-              onClick={() => {
-                setUserSignIn(true);
-              }}
-            >
-              SignIn
-            </button>
-
-            <div>
+            <div className="header">
               {userSignIn ? (
-                <SignIn
-                  setTypeOfCurrentUser={setTypeOfCurrentUser}
-                  setSignedIn={setSignedIn}
-                />
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div style={{ paddingRight: '10px'}}>Create an account?</div>
+                    <button
+                      onClick={() => {
+                        setUserSignIn(false);
+                      }}
+                    >
+                      SignUp
+                    </button>
+                  </div>
+
+                  <SignIn
+                    setTypeOfCurrentUser={setTypeOfCurrentUser}
+                    setSignedIn={setSignedIn}
+                  />
+                </div>
               ) : (
-                <SignUp
-                  setTypeOfCurrentUser={setTypeOfCurrentUser}
-                  setSignedIn={setSignedIn}
-                />
+                <div>
+                  <div style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                    }}>
+                    <div style={{ paddingRight: '10px'}}>Already have an account?</div>
+                    <button
+                      onClick={() => {
+                        setUserSignIn(true);
+                      }}
+                    >
+                      SignIn
+                    </button>
+                  </div>
+
+                  <SignUp
+                    setTypeOfCurrentUser={setTypeOfCurrentUser}
+                    setSignedIn={setSignedIn}
+                  />
+                </div>
               )}
             </div>
           </div>

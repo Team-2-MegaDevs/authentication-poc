@@ -1,10 +1,8 @@
-import React from 'react'
-import './SignUp.css'
-import {
-    signUpUser
-  } from "../../firebase/firebase-utils";
+import React from "react";
+import "./SignUp.css";
+import { signUpUser } from "../../firebase/firebase-utils";
 export default function SignUp(props) {
-    //sample user object
+  //sample user object
   const samplePassword = "456465165";
   const sampleData = {
     email: "test@test.ca",
@@ -18,34 +16,44 @@ export default function SignUp(props) {
     type: "individual",
     isEmployee: true,
   };
-  function signUpFunc (){
-    signUpUser(sampleData.email, samplePassword, sampleData)
-    props.setTypeOfCurrentUser(sampleData.type)
-    props.setSignedIn(false)
-}
-    return (
-        <div className="signUpPage">   
-            <div className="signUpBox">
-                    <div> SignUp to BELA </div>
-                    <div className="signUpForm">
-                        <div className="typeOfUserRow">
-                            <button>Individual User</button>
-                            <button>Organizational User</button>
-                        </div>
-                        <input type="text" placeholder="First Name"/>
-                        <input type="text" placeholder="Last Name"/>
-                        <input type="text" placeholder="Job Title"/>
-                        <input type="text" placeholder="Company Code (optional)"/>
-                        <input type="text" placeholder="Email"/>
-                        <input type="text" placeholder="Password"/>
-                        <input type="text" placeholder="Confirm Password"/>
-                        <input type="checkbox" id="accept" name="accept"/> I consent that I have read and agreed to the Terms &amp; Conditions
-                        <input type="checkbox" id="accept" name="accept"/> I wish to receive promos, updates, and news letters from BELA and SpeakHabla
-                    </div>
-                    <button onClick={() => signUpFunc()}>Create Account</button>
-                    
-                
+  function signUpFunc() {
+    signUpUser(sampleData.email, samplePassword, sampleData);
+    props.setTypeOfCurrentUser(sampleData.type);
+    props.setSignedIn(false);
+  }
+  return (
+    <div className="signUpPage">
+      <div className="signUpBox">
+        <div> SignUp to BELA </div>
+        <div className="signUpForm">
+          <div className="typeOfUserRow">
+            <button>Individual User</button>
+            <button>Organizational User</button>
+          </div>
+          <input type="text" placeholder="First Name" />
+          <input type="text" placeholder="Last Name" />
+          <input type="text" placeholder="Job Title" />
+          <input type="text" placeholder="Company Code (optional)" />
+          <input type="text" placeholder="Email" />
+          <input type="text" placeholder="Password" />
+          <input type="text" placeholder="Confirm Password" />
+          <div className="consentRow">
+            <input type="checkbox" id="accept" name="accept" />
+            <div>
+              I consent that I have read and agreed to the Terms &amp;
+              Conditions
             </div>
+          </div>
+          <div className="consentRow">
+            <input type="checkbox" id="accept" name="accept" />
+            <div>
+              I wish to receive promos, updates, and news letters from BELA and
+              SpeakHabla
+            </div>
+          </div>
         </div>
-    )
+        <button onClick={() => signUpFunc()}>Create Account</button>
+      </div>
+    </div>
+  );
 }

@@ -9,6 +9,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    width: 900px;
 }
 .signUpForm{
     background-color: white;
@@ -16,4 +17,12 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+}
+.consentRow{
+    display: flex;
+    flex-direction: row;
+
+}
+input{
+    margin: 5px;
 }
