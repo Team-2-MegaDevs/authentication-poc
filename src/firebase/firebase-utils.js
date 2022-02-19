@@ -48,7 +48,7 @@ export function signUpUser(userEmail, userPassword, objToAdd) {
 
 // authenticate user function
 export function authenticateUser(userEmail, userPassword) {
-  signInWithEmailAndPassword(auth, userEmail, userPassword)
+  const user = signInWithEmailAndPassword(auth, userEmail, userPassword)
     .then(async (userCredential) => {
       // Signed in
       const userEmail = await userCredential.user.email;
@@ -68,6 +68,7 @@ export function authenticateUser(userEmail, userPassword) {
     .catch((error) => {
       console.error(error.code, error.message);
     });
+  return user;
 }
 
 export async function signOutUser() {

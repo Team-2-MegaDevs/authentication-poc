@@ -5,10 +5,10 @@ export default function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function signInUser() {
-    authenticateUser(email, password);
-
-    //props.setTypeOfCurrentUser(user.type);
+  async function signInUser() {
+    const user = await authenticateUser(email, password);
+    console.log(user);
+    props.setTypeOfCurrentUser(user.type);
     props.setSignedIn(true);
   }
   return (
