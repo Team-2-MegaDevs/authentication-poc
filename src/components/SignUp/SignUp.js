@@ -3,7 +3,7 @@ import './SignUp.css'
 import {
     signUpUser
   } from "../../firebase/firebase-utils";
-export default function SignUp() {
+export default function SignUp(props) {
     //sample user object
   const samplePassword = "456465165";
   const sampleData = {
@@ -18,18 +18,20 @@ export default function SignUp() {
     type: "individual",
     isEmployee: true,
   };
+  function signUpFunc (){
+    signUpUser(sampleData.email, samplePassword, sampleData)
+    props.setTypeOfCurrentUser(sampleData.type)
+    props.setSignedIn(false)
+}
     return (
-        <div className="signUpPage">
-           
+        <div className="signUpPage">   
             <div className="signUpBox">
-                
                     <div> SignUp to BELA </div>
                     <div className="signUpForm">
                         <div className="typeOfUserRow">
                             <button>Individual User</button>
                             <button>Organizational User</button>
                         </div>
-                        
                         <input type="text" placeholder="First Name"/>
                         <input type="text" placeholder="Last Name"/>
                         <input type="text" placeholder="Job Title"/>
@@ -40,7 +42,7 @@ export default function SignUp() {
                         <input type="checkbox" id="accept" name="accept"/> I consent that I have read and agreed to the Terms &amp; Conditions
                         <input type="checkbox" id="accept" name="accept"/> I wish to receive promos, updates, and news letters from BELA and SpeakHabla
                     </div>
-                    <button onClick={() => signUpUser(sampleData.email, samplePassword, sampleData)}>Create Account</button>
+                    <button onClick={() => signUpFunc()}>Create Account</button>
                     
                 
             </div>

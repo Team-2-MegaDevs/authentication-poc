@@ -3,7 +3,7 @@ import './SignIn.css'
 import {
     authenticateUser
   } from "../../firebase/firebase-utils";
-export default function SignIn() {
+export default function SignIn(props) {
     //sample user object
   const samplePassword = "456465165";
   const sampleData = {
@@ -18,6 +18,11 @@ export default function SignIn() {
     type: "individual",
     isEmployee: true,
   };
+  function signInUser(){
+    authenticateUser(sampleData.email, samplePassword, sampleData)
+    props.setTypeOfCurrentUser(sampleData.type)
+    props.setSignedIn(true)
+  }
     return (
         <div>
             
@@ -28,7 +33,7 @@ export default function SignIn() {
                     <input type="text"/>
                     <div>Password</div>
                     <input type="text"/>
-                    <button onClick={() => authenticateUser(sampleData.email, samplePassword, sampleData)}>Sign In</button>
+                    <button onClick={() => signInUser()}>Sign In</button>
                 </div>
             </div>
         </div>

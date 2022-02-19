@@ -1,15 +1,18 @@
 import React from 'react'
-import './AdminUserPage.css'
 import {
     signOutUser
-  } from "../../firebase/firebase-utils";
-export default function AdminUserPage() {
+  } from "../../../firebase/firebase-utils";
+export default function AdminUserPage(props) {
+    function signOutFunc (){
+        signOutUser()
+        props.setSignedIn(false)
+    }
     return (
         <div>
             <div>
                 Admin Page 
             </div>
-            <button onClick={() => signOutUser()}>Sign Out</button>
+            <button onClick={() => signOutFunc()}>Sign Out</button>
         </div>
     )
 }
