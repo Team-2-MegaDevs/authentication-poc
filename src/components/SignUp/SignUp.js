@@ -6,12 +6,15 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 	const [first, setFirst] = useState("");
 	const [last, setLast] = useState("");
 	const [jobTitle, setJobTitle] = useState("");
-	const [companyCode, setCompanyCode] = useState("");
+	// const [companyCode, setCompanyCode] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [isEmployee, setIsEmployee] = useState(false);
 	const [type, setType] = useState("");
+	const [passwordShown, setPasswordShown] = useState(false);
+	const [togglePasswordText, setTogglePasswordText] = useState("show password");
+
 	//sample user object
 	const userData = {
 		email,
@@ -21,7 +24,7 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 		},
 		username: email,
 		has_purchased_certificate: false,
-		companyCode,
+		// companyCode,
 		jobTitle,
 		type,
 		isEmployee,
@@ -32,6 +35,17 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 		setTypeOfCurrentUser(type);
 		setSignedIn(false);
 	}
+
+	function togglePassword() {
+		setPasswordShown(!passwordShown);
+		//changing the text of the button toggle to show and hide the password
+		if (passwordShown) {
+			setTogglePasswordText("show password");
+		} else {
+			setTogglePasswordText("hide password");
+		}
+	}
+
 	return (
 		<div className='signUpPage'>
 			<div className='signUpBox'>
@@ -42,24 +56,21 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 							onClick={() => {
 								setIsEmployee(true);
 								setType(`${USER_TYPES.INDIVIDUAL}`);
-							}}
-						>
+							}}>
 							Individual User
 						</button>
 						<button
 							onClick={() => {
 								setIsEmployee(false);
 								setType(`${USER_TYPES.ORGANIZATION}`);
-							}}
-						>
+							}}>
 							Organizational User
 						</button>
 						<button
 							onClick={() => {
 								setIsEmployee(false);
 								setType(`${USER_TYPES.ADMIN}`);
-							}}
-						>
+							}}>
 							Admin User
 						</button>
 					</div>
@@ -86,13 +97,13 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 							setJobTitle(ev.target.value);
 						}}
 					/>
-					<input
+					{/* <input
 						type='text'
 						placeholder='Company Code (optional)'
 						onChange={ev => {
 							setCompanyCode(ev.target.value);
 						}}
-					/>
+					/> */}
 					<input
 						type='text'
 						placeholder='Email'
@@ -101,19 +112,20 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 						}}
 					/>
 					<input
-						type='text'
+						type={passwordShown ? "text" : "password"}
 						placeholder='Password'
 						onChange={ev => {
 							setPassword(ev.target.value);
 						}}
 					/>
 					<input
-						type='text'
+						type={passwordShown ? "text" : "password"}
 						placeholder='Confirm Password'
 						onChange={ev => {
 							setConfirmPassword(ev.target.value);
 						}}
 					/>
+					<button onClick={togglePassword}>{togglePasswordText}</button>
 					<div className='consentRow'>
 						<input type='checkbox' id='accept' name='accept' />
 						<div>
