@@ -7,9 +7,9 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 	const [last, setLast] = useState("");
 	const [jobTitle, setJobTitle] = useState("");
 	// const [companyCode, setCompanyCode] = useState("");
-	const [email, setEmail] = useState("");
+	const [email, setEmail] = useState({ text: "", isValid: false, message: "Email is empty"});
 	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState({text: "", isValid: false, message: "Confirm password is empty"});
 	const [isEmployee, setIsEmployee] = useState(false);
 	const [type, setType] = useState("");
 	const [passwordShown, setPasswordShown] = useState(false);
@@ -31,9 +31,19 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 	};
 
 	function signUpFunc() {
-		signUpUser(userData.email, password, userData);
-		setTypeOfCurrentUser(type);
-		setSignedIn(false);
+		if (email.isValid && confirmPassword.isValid ){
+			signUpUser(userData.email, password, userData);
+			setTypeOfCurrentUser(type);
+			setSignedIn(false);
+		}
+		else{
+			console.log(email.message)
+			console.log(confirmPassword.message)
+		}
+
+		
+		// else 
+		// 
 	}
 
 	function togglePassword() {
@@ -43,6 +53,32 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 			setTogglePasswordText("show password");
 		} else {
 			setTogglePasswordText("hide password");
+		}
+	}
+
+	function validateEmail(data) {
+		const inputData = data;
+		const inputDomain = inputData.split("@")
+		console.log(inputDomain[1])
+		// If using one of the major email companies , ask them to use their work email
+		switch (inputDomain[1]){
+			case "yahoo.com" :
+			case "gmail.com" :
+			case "hotmail.com":
+				setEmail({text: {inputData}, isValid: false, message: "Please use your work email"})
+				
+				break
+			default:
+				setEmail({text: {inputData}, isValid: true, message: "valid email"})
+		}
+		
+	}
+
+	function checkPasswordConfirmation(data){
+		if (data === password){
+			setConfirmPassword({text: {data}, isValid: true, message: "Passwords match"})
+		}else{
+			setConfirmPassword({text: {data}, isValid: false, message: "Passwords do not match"})
 		}
 	}
 
@@ -77,6 +113,7 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 					<p>You're creating user type: {type}</p>
 					<p>This user is an employee: {isEmployee ? "true" : "false"}</p>
 					<input
+						
 						type='text'
 						placeholder='First Name'
 						onChange={ev => {
@@ -108,7 +145,7 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 						type='text'
 						placeholder='Email'
 						onChange={ev => {
-							setEmail(ev.target.value);
+							validateEmail(ev.target.value);
 						}}
 					/>
 					<input
@@ -122,7 +159,7 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 						type={passwordShown ? "text" : "password"}
 						placeholder='Confirm Password'
 						onChange={ev => {
-							setConfirmPassword(ev.target.value);
+							checkPasswordConfirmation(ev.target.value);
 						}}
 					/>
 					<button onClick={togglePassword}>{togglePasswordText}</button>
