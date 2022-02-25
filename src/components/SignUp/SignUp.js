@@ -32,7 +32,8 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 
 	function signUpFunc() {
 		if (email.isValid && confirmPassword.isValid) {
-			signUpUser(userData.email, password, userData);
+			console.log(email.text.inputData)
+			signUpUser(email.text.inputData, password, userData);
 			setTypeOfCurrentUser(type);
 			setSignedIn(false);
 		}
