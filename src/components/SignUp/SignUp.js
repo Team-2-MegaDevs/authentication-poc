@@ -7,9 +7,9 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 	const [last, setLast] = useState("");
 	const [jobTitle, setJobTitle] = useState("");
 	// const [companyCode, setCompanyCode] = useState("");
-	const [email, setEmail] = useState({ text: "", isValid: false, message: "Email is empty"});
+	const [email, setEmail] = useState({ text: "", isValid: false, message: "Email is empty" });
 	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState({text: "", isValid: false, message: "Confirm password is empty"});
+	const [confirmPassword, setConfirmPassword] = useState({ text: "", isValid: false, message: "Confirm password is empty" });
 	const [isEmployee, setIsEmployee] = useState(false);
 	const [type, setType] = useState("");
 	const [passwordShown, setPasswordShown] = useState(false);
@@ -31,19 +31,16 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 	};
 
 	function signUpFunc() {
-		if (email.isValid && confirmPassword.isValid ){
+		if (email.isValid && confirmPassword.isValid) {
 			signUpUser(userData.email, password, userData);
 			setTypeOfCurrentUser(type);
 			setSignedIn(false);
 		}
-		else{
+		else {
 			console.log(email.message)
 			console.log(confirmPassword.message)
 		}
 
-		
-		// else 
-		// 
 	}
 
 	function togglePassword() {
@@ -60,25 +57,30 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 		const inputData = data;
 		const inputDomain = inputData.split("@")
 		console.log(inputDomain[1])
-		// If using one of the major email companies , ask them to use their work email
-		switch (inputDomain[1]){
-			case "yahoo.com" :
-			case "gmail.com" :
-			case "hotmail.com":
-				setEmail({text: {inputData}, isValid: false, message: "Please use your work email"})
-				
-				break
-			default:
-				setEmail({text: {inputData}, isValid: true, message: "valid email"})
+		if (inputDomain[1] != null) {
+			console.log(inputDomain[1])
+			// If using one of the major email companies , ask them to use their work email
+			switch (inputDomain[1]) {
+				case "yahoo.com":
+				case "gmail.com":
+				case "hotmail.com":
+					setEmail({ text: { inputData }, isValid: false, message: "Please use your work email" })
+					break
+				default:
+					setEmail({ text: { inputData }, isValid: true, message: "valid email" })
+			}
+		}else{
+			setEmail({ text: { inputData }, isValid: false, message: "Invalid email" })
 		}
-		
+
+
 	}
 
-	function checkPasswordConfirmation(data){
-		if (data === password){
-			setConfirmPassword({text: {data}, isValid: true, message: "Passwords match"})
-		}else{
-			setConfirmPassword({text: {data}, isValid: false, message: "Passwords do not match"})
+	function checkPasswordConfirmation(data) {
+		if (data === password) {
+			setConfirmPassword({ text: { data }, isValid: true, message: "Passwords match" })
+		} else {
+			setConfirmPassword({ text: { data }, isValid: false, message: "Passwords do not match" })
 		}
 	}
 
@@ -113,7 +115,7 @@ export default function SignUp({ setTypeOfCurrentUser, setSignedIn }) {
 					<p>You're creating user type: {type}</p>
 					<p>This user is an employee: {isEmployee ? "true" : "false"}</p>
 					<input
-						
+
 						type='text'
 						placeholder='First Name'
 						onChange={ev => {
